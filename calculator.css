@@ -1,0 +1,114 @@
+:root {
+    --bg-primary: #0b0b0b;
+    --bg-secondary: #141414;
+    --surface: #1a1a1a;
+    --accent-primary: #ffd400;
+    --accent-hover: #ffc300;
+    --text-primary: #f5f5f5;
+    --text-muted: #bfbfbf;
+    --border-color: #2a2a2a;
+    --danger: #ff4d4d;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background:
+        radial-gradient(circle at 20% 15%, rgba(255, 212, 0, 0.14), transparent 35%),
+        radial-gradient(circle at 80% 85%, rgba(255, 212, 0, 0.1), transparent 40%),
+        var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.calculator {
+    width: min(92vw, 360px);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.display {
+    width: 100%;
+    height: 52px;
+    margin-bottom: 12px;
+    text-align: right;
+    padding: 8px 12px;
+    font-size: 1.35rem;
+    color: var(--text-primary);
+    background-color: #111111;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.button {
+    min-height: 44px;
+    padding: 12px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border: 1px solid #2f2f2f;
+    border-radius: 8px;
+    background-color: var(--surface);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background-color 160ms ease, transform 120ms ease, border-color 160ms ease;
+}
+
+.button:hover {
+    background-color: #222222;
+    border-color: #3a3a3a;
+}
+
+.button:active {
+    transform: translateY(1px);
+}
+
+.button:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+.button.operator {
+    background-color: var(--accent-primary);
+    border-color: #d7af00;
+    color: #111111;
+}
+
+.button.operator:hover {
+    background-color: var(--accent-hover);
+}
+
+.button.equals {
+    background-color: #ffe066;
+    border-color: #e0bf38;
+    color: #111111;
+}
+
+.button.equals:hover {
+    background-color: var(--accent-primary);
+}
+
+.button.clear {
+    background-color: #2a0f0f;
+    border-color: #4a1d1d;
+    color: #ff8c8c;
+}
+
+.button.clear:hover {
+    background-color: #361414;
+}
