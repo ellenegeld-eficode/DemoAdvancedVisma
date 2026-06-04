@@ -1,5 +1,5 @@
 ---
-name: frontend test agent
+name: frontend-test
 description: Runs and fixes frontend-focused tests, including UI and browser automation suites.
 argument-hint: frontend tests
 # tools: ['read', 'search', 'execute', 'edit', 'todo']

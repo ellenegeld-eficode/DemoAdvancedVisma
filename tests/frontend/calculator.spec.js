@@ -27,9 +27,3 @@ test('clears the display', async ({ page }) => {
 
   await expect(page.locator('.display')).toHaveValue('');
 });
-
-test('calculates modulo', async ({ page }) => {
-  await pressButtons(page, ['6', '%', '5', '=']);
-
-  await expect(page.locator('.display')).toHaveValue('1');
-});

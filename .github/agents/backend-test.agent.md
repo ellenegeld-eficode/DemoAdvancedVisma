@@ -1,5 +1,5 @@
 ---
-name: backend test agent
+name: backend-test
 description: Runs and fixes backend-focused tests such as API, service, and integration test suites.
 argument-hint: backend tests
 # tools: ['read', 'search', 'execute', 'edit', 'todo']
