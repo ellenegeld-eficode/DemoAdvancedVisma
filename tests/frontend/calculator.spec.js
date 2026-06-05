@@ -22,8 +22,28 @@ test('adds two numbers', async ({ page }) => {
   await expect(page.locator('.display')).toHaveValue('5');
 });
 
+test('calculates modulo for two numbers', async ({ page }) => {
+  await pressButtons(page, ['6', '%', '5', '=']);
+
+  await expect(page.locator('.display')).toHaveValue('1');
+});
+
 test('clears the display', async ({ page }) => {
   await pressButtons(page, ['9', 'C']);
 
   await expect(page.locator('.display')).toHaveValue('');
+});
+
+test('rejects oversized expressions', async ({ page }) => {
+  await page.evaluate(() => {
+    const display = document.querySelector('.display');
+
+    if (display) {
+      display.value = '1'.repeat(257);
+    }
+  });
+
+  await pressButtons(page, ['=']);
+
+  await expect(page.locator('.display')).toHaveValue('Error');
 });

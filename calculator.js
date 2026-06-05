@@ -6,9 +6,21 @@ const OPERATOR_PRECEDENCE = {
     '-': 1,
     '*': 2,
     '/': 2,
+    '%': 2,
 };
 
+const MAX_EXPRESSION_LENGTH = 256;
+const MAX_TOKENS = 128;
+
 function tokenizeExpression(expression) {
+    if (typeof expression !== 'string') {
+        throw new Error('Invalid expression');
+    }
+
+    if (expression.length > MAX_EXPRESSION_LENGTH) {
+        throw new Error('Expression too long');
+    }
+
     const tokens = [];
     let numberBuffer = '';
 
@@ -29,11 +41,21 @@ function tokenizeExpression(expression) {
                 throw new Error('Invalid number');
             }
             tokens.push(Number(numberBuffer));
+
+            if (tokens.length > MAX_TOKENS) {
+                throw new Error('Expression too complex');
+            }
+
             numberBuffer = '';
         }
 
         if (Object.prototype.hasOwnProperty.call(OPERATOR_PRECEDENCE, char)) {
             tokens.push(char);
+
+            if (tokens.length > MAX_TOKENS) {
+                throw new Error('Expression too complex');
+            }
+
             continue;
         }
 
@@ -45,6 +67,10 @@ function tokenizeExpression(expression) {
             throw new Error('Invalid number');
         }
         tokens.push(Number(numberBuffer));
+
+        if (tokens.length > MAX_TOKENS) {
+            throw new Error('Expression too complex');
+        }
     }
 
     return tokens;
@@ -99,6 +125,9 @@ function applyOperator(values, operator) {
         case '/':
             values.push(left / right);
             break;
+        case '%':
+            values.push(left % right);
+            break;
         default:
             throw new Error('Invalid operator');
     }
@@ -130,7 +159,7 @@ function evaluateExpression(expression) {
         while (
             operators.length > 0 &&
             OPERATOR_PRECEDENCE[operators[operators.length - 1]] >=
-                OPERATOR_PRECEDENCE[token]
+            OPERATOR_PRECEDENCE[token]
         ) {
             applyOperator(values, operators.pop());
         }
@@ -168,6 +197,10 @@ buttons.forEach((button) => {
         } else if (value === 'C') {
             display.value = '';
         } else {
+            if (display.value.length >= MAX_EXPRESSION_LENGTH) {
+                return;
+            }
+
             display.value += value;
         }
     });
