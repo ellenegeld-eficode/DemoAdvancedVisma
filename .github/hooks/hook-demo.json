@@ -1,0 +1,21 @@
+{
+    "version": 1,
+    "hooks": {
+        "sessionStart": [
+            {
+                "type": "command",
+                "powershell": "Add-Content -Path logs/session.log -Value \"Session started: $(Get-Date)\"",
+                "cwd": ".github/hooks",
+                "timeoutSec": 10
+            }
+        ],
+        "preToolUse": [
+            {
+                "type": "command",
+                "powershell": "$input | & .\\scripts\\log-preToolUse.ps1",
+                "cwd": ".github/hooks",
+                "timeoutSec": 10
+            }
+        ]
+    }
+}
