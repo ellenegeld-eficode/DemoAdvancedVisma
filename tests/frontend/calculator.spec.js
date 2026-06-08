@@ -22,6 +22,12 @@ test('adds two numbers', async ({ page }) => {
   await expect(page.locator('.display')).toHaveValue('5');
 });
 
+test('calculates modulo for two numbers', async ({ page }) => {
+  await pressButtons(page, ['6', '%', '5', '=']);
+
+  await expect(page.locator('.display')).toHaveValue('1');
+});
+
 test('clears the display', async ({ page }) => {
   await pressButtons(page, ['9', 'C']);
 
