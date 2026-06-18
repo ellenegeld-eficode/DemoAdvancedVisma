@@ -6,6 +6,7 @@ const {
   subtract,
   multiply,
   divide,
+  modulo,
 } = require("../../backend/calculatorService");
 
 test("add returns the sum of two positive numbers", () => {
@@ -34,4 +35,16 @@ test("divide handles decimal results", () => {
 
 test("divide throws for zero divisor", () => {
   assert.throws(() => divide(5, 0), /Cannot divide by zero/);
+});
+
+test("modulo returns the remainder of two numbers", () => {
+  assert.equal(modulo(6, 5), 1);
+});
+
+test("modulo supports decimal operands", () => {
+  assert.equal(modulo(7.5, 2), 1.5);
+});
+
+test("modulo throws for zero divisor", () => {
+  assert.throws(() => modulo(5, 0), /Cannot modulo by zero/);
 });

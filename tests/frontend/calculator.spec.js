@@ -22,6 +22,18 @@ test('adds two numbers', async ({ page }) => {
   await expect(page.locator('.display')).toHaveValue('5');
 });
 
+test('computes modulo remainder', async ({ page }) => {
+  await pressButtons(page, ['6', '%', '5', '=']);
+
+  await expect(page.locator('.display')).toHaveValue('1');
+});
+
+test('applies modulo precedence before addition', async ({ page }) => {
+  await pressButtons(page, ['1', '+', '6', '%', '4', '=']);
+
+  await expect(page.locator('.display')).toHaveValue('3');
+});
+
 test('clears the display', async ({ page }) => {
   await pressButtons(page, ['9', 'C']);
 

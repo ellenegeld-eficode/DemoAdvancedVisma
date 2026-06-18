@@ -6,6 +6,7 @@ const OPERATOR_PRECEDENCE = {
     '-': 1,
     '*': 2,
     '/': 2,
+    '%': 2,
 };
 
 function tokenizeExpression(expression) {
@@ -99,6 +100,9 @@ function applyOperator(values, operator) {
         case '/':
             values.push(left / right);
             break;
+        case '%':
+            values.push(left % right);
+            break;
         default:
             throw new Error('Invalid operator');
     }
@@ -130,7 +134,7 @@ function evaluateExpression(expression) {
         while (
             operators.length > 0 &&
             OPERATOR_PRECEDENCE[operators[operators.length - 1]] >=
-                OPERATOR_PRECEDENCE[token]
+            OPERATOR_PRECEDENCE[token]
         ) {
             applyOperator(values, operators.pop());
         }
